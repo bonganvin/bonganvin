@@ -1,0 +1,260 @@
+<div style="display:none;">{% if isPaid %}</div>
+<div style="position:absolute;top:0;left:0;opacity:0.6;"><img alt="Paid Watermark" class="wait-load"
+        src="{&#8203;{ paidWatermark }&#8203;}" /></div>
+<div style="display:none;">{% endif %}</div>
+<table cellspacing="0" style="margin:40px 0 10px;font-size:12px;line-height:1.35;">
+    <tbody>
+        <tr>
+            <td width="58%" valign="top">&nbsp;</td>
+            <td width="42%" valign="top"><span style="display:none;">{% if logoUrl %}</span>
+                <img alt="Your Logo" class="wait-load organization-logo" src="http:{&#8203;{ logoUrl }&#8203;}"
+                    width="200px" /><span style="display:none;">{% else %}</span>
+                <h1>{{organizationName}}</h1>
+                <span style="display:none;">{% endif %}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table cellspacing="0" style="margin:0 0 40px;font-size:12px;line-height:1.35;">
+    <tbody>
+        <tr>
+            <td width="60%" valign="top">
+                <h1 class="invoice-title" style="margin:0;font-size:28px;font-weight:normal;">TAX INVOICE</h1>
+                <div style="margin:0 0 0 50px;">
+                    <p style="margin-top:0;">{{name}}</p>
+                    <p style="margin-top:0;">{{address}}</p>
+                    <p style="margin-top:0;">{{city}}</p>
+                    <p style="margin-top:0;">{{regId}}</p>
+                    <p style="margin-top:0;">{{vatId}}</p>
+                </div>
+            </td>
+            <td width="40%" valign="top">
+                <table cellspacing="0" style="margin:0 0 10px;font-size:12px;line-height:1.35;">
+                    <tbody>
+                        <tr>
+                            <td width="50%" valign="top">
+                                <p style="margin:0;"><strong>Invoice Date</strong></p>
+                                <p style="margin:0 0 5px;">{{invoiceDate}}</p>
+                                <p style="margin:0;"><strong>Due Date</strong></p>
+                                <p style="margin:0 0 5px;">{{dueDate}}</p>
+                                <p style="margin:0;"><strong>Invoice Number</strong></p>
+                                <p style="margin:0 0 5px;">{{number}}</p>
+                                <span style="display:none;">{% if reference %}</span>
+                                <p style="margin:0;"><strong>Reference</strong></p>
+                                <p style="margin:0 0 5px;">{{reference}}</p>
+                                <span style="display:none;">{% endif %}</span>
+                                <span style="display:none;">{% if organizationVatId %}</span>
+                                <p style="margin:0;"><strong>VAT Number</strong></p>
+                                <p style="margin:0 0 5px;">{{organizationVatId}}</p>
+                                <span style="display:none;">{% endif %}</span>
+                            </td>
+                            <td width="50%" valign="top">
+                                <p style="margin-top:0;">{{organizationName}}</p>
+                                <p style="margin-top:0;">{{organizationAddress}}</p>
+                                <p style="margin-top:0;">{{organizationCity}}</p>
+                                <p style="margin-top:0;">{{organizationRegId}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 align="center">Summary By Account</h2>
+<table>
+    <tbody>
+        <tr>
+            <td width="33%">&nbsp;</td>
+            <td width="33%">
+                <table cellspacing="0" align="center" style="margin:20px 0 0;font-size:12px;line-height:1.35;">
+                    <tbody>
+                        <tr style="display:none;">
+                            <td><span style="display:none;">{% for item in itemsByAccount %}</span></td>
+                        </tr>
+                        <tr>
+                            <td width="50%" align="left" valign="top"
+                                style="padding:10px 0;border-bottom:1px solid #ccc;">{{item.accountName}}
+                            </td>
+                            <td width="40%" align="right" valign="top"
+                                style="padding:10px 0;border-bottom:1px solid #ccc;">{{item.accountTotal}}
+                            </td>
+                            <td width="10%" align="right" valign="top"
+                                style="padding:10px 0;border-bottom:1px solid #ccc;">&nbsp;{{currency.code}}
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td><span style="display:none;">{% endfor %}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="right" valign="top">
+                    <tbody>
+                        <tr valign="top">
+                            <td align="left" style="padding:5px 0;border-bottom:1px solid #ccc;">Net Total</td>
+                            <td align="right" style="padding:5px 0;border-bottom:1px solid #ccc;">{{subtotal}}</td>
+                        </tr>
+                        <tr valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">
+                            <td align="left" style="padding:5px 0;border-bottom:1px solid #ccc;">VAT {{vatPercent}}</td>
+                            <td align="right" style="padding:5px 0;border-bottom:1px solid #ccc;">{{vatAmount}}</td>
+                        </tr>
+                        <tr valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">
+                            <td align="left" style="padding:5px 0;border-bottom:1px solid #ccc;">Total Due</td>
+                            <td align="right" style="padding:5px 0;border-bottom:1px solid #ccc;">{{payableAmount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="33%">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<br />
+<table>
+    <tbody>
+        <tr>
+            <td width="33%">&nbsp;</td>
+            <td width="33%">
+                <table align="center" cellspacing="0" style="margin:20px 0;font-size:12px;line-height:1.35;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Please make Payments to {{organizationName}}</p>
+                                <p>{{organizationAccountBank}}</p>
+                                <p>Account No: {{organizationAccountIban}}</p>
+                                <p>Bank: {{organizationAccountBank}}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="33%">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<h2 align="center" style="page-break-before: always">Detailed Summary</h2>
+<nobr>
+    <table cellspacing="0" style="margin:20px 0 0;font-size:12px;">
+        <tbody>
+            <tr style="display:none;">
+                <td><span style="display:none;">{% for item in itemsByAccount %}</span></td>
+            </tr>
+            <tr>
+                <td align="left" valign="top" style="padding:10px 0;">
+                    <h2>{{item.accountName}}</h2>
+                </td>
+            </tr>
+            <tr>
+                <td width="60%" align="left" valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">
+                    Description</td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">Quantity
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">Unit
+                    Price</td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">VAT
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;border-bottom:1px solid #ccc;">Subtotal
+                </td>
+            </tr>
+            <tr style="display:none;">
+                <td><span style="display:none;">{% for line in item.itemsForAccount %}</span></td>
+            </tr>
+            <tr>
+                <td width="60%" align="left" valign="top" style="padding:5px 0;">{{line.description}}
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;">{{line.quantity}}
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;">
+                    {{line.unitPrice}}&nbsp;{{currency.code}}
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;">{{line.vatPercent}}%
+                </td>
+                <td width="10%" align="right" valign="top" style="padding:5px 0;">
+                    {{line.subtotal}}&nbsp;{{currency.code}}
+                </td>
+            </tr>
+            <tr style="display:none;">
+                <td><span style="display:none;">{% endfor %}</span></td>
+            </tr>
+            <tr style="display:none;">
+                <td><span style="display:none;">{% endfor %}</span></td>
+            </tr>
+        </tbody>
+    </table>
+</nobr>
+<h2>Total</h2>
+<table cellspacing="0" style="margin:0 0 40px;font-size:12px;line-height:1.35;">
+    <tbody>
+        <tr>
+            <td width="46%" valign="top">&nbsp;</td>
+            <td width="54%" valign="top">
+                <table cellspacing="0" style="margin:0;font-size:12px;line-height:1.35;">
+                    <tbody>
+                        <tr>
+                            <td width="72%" align="right" valign="top" style="padding:10px 0;">Subtotal
+                            </td>
+                            <td width="28%" align="right" valign="top" style="padding:10px 0;">{{subtotal}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" valign="top" style="padding:10px 0;">Discount
+                            </td>
+                            <td width="28%" align="right" valign="top" style="padding:10px 0;">{{discountAmount}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" valign="top" style="padding:10px 0;">Taxable Amount
+                            </td>
+                            <td width="28%" align="right" valign="top" style="padding:10px 0;">{{taxInfo.totalTaxable}}
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td><span style="display:none;">{% for vat in vatAmounts %}</span></td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" valign="top"
+                                style="padding:10px 0;border-bottom:2px solid #2f2f2f;">TOTAL {{vat.name}}
+                                {{vat.percent}}
+                            </td>
+                            <td width="28%" align="right" valign="top"
+                                style="padding:10px 0;border-bottom:2px solid #2f2f2f;">{{vat.total}}
+                            </td>
+                        </tr>
+                        <tr style="display:none;">
+                            <td><span style="display:none;">{% endfor %}</span></td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" valign="top" style="padding:10px 0;font-weight:bold;">TOTAL
+                                {{currency.code}}
+                            </td>
+                            <td width="28%" align="right" valign="top" style="padding:10px 0;font-weight:bold;">
+                                {{currency.code}} {{amount}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="72%" align="right" valign="top" style="padding:10px 0;font-weight:bold;">Amount
+                                Due {{currency.code}}
+                            </td>
+                            <td width="28%" align="right" valign="top" style="padding:10px 0;font-weight:bold;">
+                                {{payableAmount}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="no-pagebreak">
+    <p style="margin-bottom:0;font-size:10px;line-height:1.35;"><span
+            style="display:none;">{% if organizationRegId %}</span>
+        Company Registration No: {{organizationRegId}}.
+        <span style="display:none;">{% endif %}</span>
+        <span style="display:none;">{% if organizationAddress %}</span>
+        {{organizationAddress}},
+        <span style="display:none;">{% endif %}</span>
+        <span style="display:none;">{% if organizationCity %}</span>
+        {{organizationCity}}.
+        <span style="display:none;">{% endif %}</span>
+    </p>
+</div>
